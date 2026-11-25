@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalFit Control | Gimnasio</title>
+
+    <style>
+        /* ==============================
+           1. CONFIGURACIÓN GENERAL
+        ============================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --negro: #111827;
+            --verde: #39A900;
+            --blanco: #FFFFFF;
+            --gris: #F3F4F6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--gris);
+            color: var(--negro);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==============================
+           2. ENCABEZADO Y MENÚ
+        ============================== */
+
+        header {
+            background-color: var(--negro);
+            color: var(--blanco);
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--verde);
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--verde);
+        }
+
+        /* ==============================
+           3. SECCIÓN PRINCIPAL
+        ============================== */
+
+        .hero {
+            background: linear-gradient(120deg, #111827, #263445);
+            color: var(--blanco);
+            text-align: center;
+            padding: 110px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            max-width: 850px;
+            margin: auto;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--verde);
+        }
+
+        .hero p {
+            margin: 25px auto;
+            font-size: 17px;
+            max-width: 650px;
+            color: #D1D5DB;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--verde);
+            color: var(--blanco);
+            padding: 13px 28px;
+            border-radius: 6px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2d8500;
+            transform: translateY(-2px);
+        }
+
+        /* ==============================
+           4. ESTILOS DE LAS SECCIONES
+        ============================== */
+
+        section {
+            padding: 70px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #6B7280;
+        }
+
+        /* ==============================
+           5. TARJETAS DE SERVICIOS
+        ============================== */
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .service-card {
+            background-color: var(--blanco);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-7px);
+            border-bottom: 4px solid var(--verde);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: #6B7280;
+            font-size: 14px;
+        }
+
+        /* ==============================
+           6. PLANES DE MEMBRESÍA
+        ============================== */
+
+        .plans {
+            background-color: var(--negro);
+            color: var(--blanco);
+        }
+
+        .plans .section-title p {
+            color: #D1D5DB;
+        }
+
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .plan-card {
+            background-color: #1F2937;
+            padding: 35px 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #374151;
+        }
+
+        .plan-card.featured {
+            border: 2px solid var(--verde);
+            transform: scale(1.03);
+        }
+
+        .plan-card h3 {
+            font-size: 23px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--verde);
+            margin-bottom: 20px;
+        }
+
+        .plan-card ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .plan-card li {
+            margin: 12px 0;
+            color: #D1D5DB;
+        }
+
+        /* ==============================
+           7. FORMULARIO DE CONTACTO
+        ============================== */
+
+        .contact-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: var(--blanco);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .contact-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .contact-container input,
+        .contact-container select {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 20px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .contact-container input:focus,
+        .contact-container select:focus {
+            outline: 2px solid var(--verde);
+            border-color: var(--verde);
+        }
+
+        .contact-container button {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        /* Mensaje de confirmación */
+
+        #mensaje {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #E5F7DC;
+            color: #226600;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* ==============================
+           8. PIE DE PÁGINA
+        ============================== */
+
+        footer {
+            background-color: var(--negro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        footer span {
+            color: var(--verde);
+        }
+
+        footer p {
+            margin: 7px 0;
+            font-size: 14px;
+            color: #D1D5DB;
+        }
+
+        /* ==============================
+           9. DISEÑO RESPONSIVE
+        ============================== */
+
+        @media (max-width: 768px) {
+
+            header {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            nav {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 75px 20px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .services-container,
+            .plans-container {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-card.featured {
+                transform: none;
+            }
+
+            section {
+                padding: 55px 6%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+
+        <div class="logo">
+            VitalFit <span>Control</span>
+        </div>
+
+        <!-- Menú de navegación -->
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#planes">Planes</a>
+            <a href="#contacto">Contáctanos</a>
+        </nav>
+
+    </header>
+
+
+    <!-- SECCIÓN PRINCIPAL -->
+    <section class="hero" id="inicio">
+
+        <h1>
+            Entrena, controla tu progreso y reserva tus clases
+            desde <span>una sola plataforma</span>
+        </h1>
+
+        <p>
+            En VitalFit Control te ayudamos a alcanzar tus objetivos
+            con entrenadores especializados, rutinas personalizadas
+            y seguimiento de tu rendimiento.
+        </p>
+
+        <a href="#planes" class="btn">
+            Conoce nuestros planes
+        </a>
+
+    </section>
+
+
+    <!-- SERVICIOS -->
+    <section id="servicios">
+
+        <div class="section-title">
+            <h2>Nuestros servicios</h2>
+            <p>Todo lo que necesitas para mejorar tu rendimiento físico.</p>
+        </div>
+
+        <div class="services-container">
+
+            <!-- Servicio 1 -->
+            <div class="service-card">
+                <div class="service-icon">💪</div>
+                <h3>Membresías</h3>
+                <p>
+                    Accede a nuestras instalaciones y disfruta de
+                    diferentes planes de entrenamiento según tus necesidades.
+                </p>
+            </div>
+
+            <!-- Servicio 2 -->
+            <div class="service-card">
+                <div class="service-icon">📋</div>
+                <h3>Rutinas personalizadas</h3>
+                <p>
+                    Obtén planes de entrenamiento diseñados por
+                    profesionales para alcanzar tus objetivos.
+                </p>
+            </div>
+
+            <!-- Servicio 3 -->
+            <div class="service-card">
+                <div class="service-icon">🏋️</div>
+                <h3>Clases grupales</h3>
+                <p>
+                    Reserva tus clases favoritas, participa en
+                    actividades grupales y mejora tu condición física.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PLANES DE MEMBRESÍA -->
+    <section class="plans" id="planes">
+
+        <div class="section-title">
+            <h2>Elige tu plan ideal</h2>
+            <p>Tenemos diferentes opciones para acompañar tu progreso.</p>
+        </div>
+
+        <div class="plans-container">
+
+            <!-- Plan básico -->
+            <div class="plan-card">
+
+                <h3>Básico</h3>
+
+                <div class="price">$60.000</div>
+
+                <ul>
+                    <li>✓ Acceso al gimnasio</li>
+                    <li>✓ Control de asistencia</li>
+                    <li>✓ Rutinas generales</li>
+                    <li>✓ Entrenamiento individual</li>
+                </ul>
+
+                <a href="#contacto" class="btn">Solicitar información</a>
+
+            </div>
+
+
+            <!-- Plan premium -->
+            <div class="plan-card featured">
+
+                <h3>Premium</h3>
+
+                <div class="price">$100.000</div>
+
+                <ul>
+                    <li>✓ Acceso ilimitado</li>
+                    <li>✓ Rutinas personalizadas</li>
+                    <li>✓ Clases grupales</li>
+                    <li>✓ Seguimiento de progreso</li>
+                    <li>✓ Asesoría de entrenador</li>
+                </ul>
+
+                <a href="#contacto" class="btn">Solicitar información</a>
+
+            </div>
+
+
+            <!-- Plan familiar -->
+            <div class="plan-card">
+
+                <h3>Familiar</h3>
+
+                <div class="price">$180.000</div>
+
+                <ul>
+                    <li>✓ Hasta 3 integrantes</li>
+                    <li>✓ Acceso al gimnasio</li>
+                    <li>✓ Clases grupales</li>
+                    <li>✓ Control de asistencia</li>
+                    <li>✓ Rutinas generales</li>
+                </ul>
+
+                <a href="#contacto" class="btn">Solicitar información</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMULARIO DE CONTACTO -->
+    <section id="contacto">
+
+        <div class="section-title">
+            <h2>Solicita información</h2>
+            <p>Déjanos tus datos y nos comunicaremos contigo.</p>
+        </div>
+
+        <div class="contact-container">
+
+            <form id="formulario">
+
+                <!-- Campo nombre -->
+                <label for="nombre">Nombre completo</label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Escribe tu nombre"
+                >
+
+                <!-- Campo correo -->
+                <label for="correo">Correo electrónico</label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    placeholder="ejemplo@correo.com"
+                >
+
+                <!-- Selección del plan -->
+                <label for="plan">Plan de interés</label>
+
+                <select id="plan">
+
+                    <option value="">Selecciona un plan</option>
+                    <option value="Básico">Básico</option>
+                    <option value="Premium">Premium</option>
+                    <option value="Familiar">Familiar</option>
+
+                </select>
+
+                <!-- Botón de envío -->
+                <button type="submit" class="btn">
+                    Enviar solicitud
+                </button>
+
+            </form>
+
+            <!-- Aquí aparece el mensaje de confirmación -->
+            <div id="mensaje" role="status" aria-live="polite">
+                Solicitud enviada correctamente.
+                Un asesor se comunicará contigo.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+
+        <h2>VitalFit <span>Control</span></h2>
+
+        <p>Dirección: Calle 15 # 20-30, Ibagué, Colombia</p>
+
+        <p>Teléfono: +57 300 123 4567</p>
+
+        <p>Correo: contacto@vitalfitcontrol.com</p>
+
+        <p>Horario: Lunes a sábado de 6:00 AM a 9:00 PM</p>
+
+        <p>
+            © 2026 VitalFit Control.
+            Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+
+    <!-- ==============================
+         10. JAVASCRIPT
+    ============================== -->
+
+    <script>
+
+        // Obtener el formulario y los elementos necesarios
+        const formulario = document.getElementById("formulario");
+
+        const nombre = document.getElementById("nombre");
+
+        const correo = document.getElementById("correo");
+
+        const mensaje = document.getElementById("mensaje");
+
+
+        // Escuchar el evento de envío del formulario
+        formulario.addEventListener("submit", function(event) {
+
+            // Evitar que la página se recargue
+            event.preventDefault();
+
+            // Obtener los valores ingresados por el usuario
+            const nombreIngresado = nombre.value.trim();
+
+            const correoIngresado = correo.value.trim();
+
+
+            // Validar que el nombre y el correo no estén vacíos
+            if (nombreIngresado === "" || correoIngresado === "") {
+
+                alert("Por favor, completa tu nombre y correo electrónico.");
+
+                mensaje.style.display = "none";
+
+                return;
+            }
+
+
+            // Validar que el correo tenga un formato correcto
+            const expresionCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!expresionCorreo.test(correoIngresado)) {
+
+                alert("Por favor, ingresa un correo electrónico válido.");
+
+                mensaje.style.display = "none";
+
+                return;
+            }
+
+
+            // Mostrar mensaje de confirmación
+            mensaje.style.display = "block";
+
+
+            // Limpiar los campos del formulario
+            formulario.reset();
+
+        });
+
+    </script>
+
+</body>
+</html>
